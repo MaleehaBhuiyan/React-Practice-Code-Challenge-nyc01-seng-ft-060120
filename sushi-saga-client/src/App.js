@@ -10,8 +10,13 @@ class App extends Component {
   state = {
     spliceStart: 0,
     spliceEnd: 4,
+    eaten: [],
     sushiArray: []
   }
+
+  // addPlate = () => {
+  //   array << 1
+  // }
 
   componentDidMount(){
     fetch(`${API}`)
@@ -31,11 +36,27 @@ class App extends Component {
     // this.setState({ sushiArray: this.state.sushiArray.splice(this.state.spliceStart, this.state.spliceEnd) })
   }
 
+  addPlate = (sushi) => {
+
+    this.setState({
+        eaten: [...this.state.eaten, sushi]
+    })
+    // const newMoney = this.state.money - sushi.price
+
+    // if (!this.state.eaten.includes(sushi) && newMoney >=0 ) {
+    //   this.setState({
+    //     eaten: [...this.state.eaten, sushi],
+    //     money: newMoney
+    //   })
+    // }
+  }
+
   render() {
+
     return (
       <div className="app">
-        <SushiContainer sushiArray={this.chooseFourSushis()} moreButton={this.moreButton} />
-        <Table />
+        <SushiContainer addPlate={this.addPlate} sushiArray={this.chooseFourSushis()} moreButton={this.moreButton} />
+        <Table eaten={this.state.eaten}/>
       </div>
     );
   }
