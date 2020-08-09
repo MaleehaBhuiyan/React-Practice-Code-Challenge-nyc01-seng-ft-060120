@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import Form from '../components/Form'
 
 const Table = (props) => {
 
@@ -14,6 +15,7 @@ const Table = (props) => {
         You have: ${ props.balance } remaining!
       </h1>
       <div className="table">
+      <Form updateBalance={props.updateBalance}/>
         <div className="stack">
           {
             /* 
