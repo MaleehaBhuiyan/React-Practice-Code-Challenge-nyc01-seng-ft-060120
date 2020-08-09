@@ -11,15 +11,34 @@ class Sushi extends React.Component{
       this.setState({
         img_src: newImg
     })
+
     this.props.addPlate(this.props.sushi)
+
+    // if(this.props.balance > this.props.sushi.price){
+    //   this.props.addPlate(this.props.sushi)
+    // }
+    // else{
+    //   this.alert
+    // }
   }
+
+
+  balanceClick = () => {
+    if(this.props.balance > this.props.sushi.price){
+      this.handleClick()
+    }
+    else{
+      alert("You don't have enough money! Add more money!!!")
+    }
+  }
+
 
   render(){
 
     return (
       <div className="sushi">
         <div className="plate" 
-            onClick={this.handleClick}>
+            onClick={this.balanceClick}>
           { 
             /* Tell me if this sushi has been eaten! */ 
             false ?

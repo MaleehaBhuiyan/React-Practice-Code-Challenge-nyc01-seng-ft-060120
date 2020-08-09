@@ -11,7 +11,8 @@ class App extends Component {
     spliceStart: 0,
     spliceEnd: 4,
     eaten: [],
-    sushiArray: []
+    sushiArray: [],
+    balance: 100
   }
 
   // addPlate = () => {
@@ -37,10 +38,31 @@ class App extends Component {
   }
 
   addPlate = (sushi) => {
-
     this.setState({
         eaten: [...this.state.eaten, sushi]
     })
+
+    if(sushi.price < this.state.balance){
+      let newBalance = this.state.balance - sushi.price 
+      this.setState({ balance:newBalance })
+    }
+  }
+
+  render() {
+
+    return (
+      <div className="app">
+        <SushiContainer addPlate={this.addPlate} sushiArray={this.chooseFourSushis()} moreButton={this.moreButton} balance={this.state.balance}/>
+        <Table eaten={this.state.eaten} balance={this.state.balance}/>
+      </div>
+    );
+  }
+}
+
+export default App;
+
+
+
     // const newMoney = this.state.money - sushi.price
 
     // if (!this.state.eaten.includes(sushi) && newMoney >=0 ) {
@@ -49,18 +71,3 @@ class App extends Component {
     //     money: newMoney
     //   })
     // }
-  }
-
-  render() {
-
-    return (
-      <div className="app">
-        <SushiContainer addPlate={this.addPlate} sushiArray={this.chooseFourSushis()} moreButton={this.moreButton} />
-        <Table eaten={this.state.eaten}/>
-      </div>
-    );
-  }
-}
-
-export default App;
-
